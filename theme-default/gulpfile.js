@@ -184,7 +184,9 @@ gulp.task('cms-css', () => {
  */
 gulp.task('make-js-components', () => {
 	return gulp
-		.src(PATHS.src + 'js/components/**/*.js')
+        .src([
+	        'node_modules/babel-polyfill/dist/polyfill.min.js',
+	        PATHS.src + 'js/components/**/*.js'])
 		.pipe(
 			load.eslint({
 				globals: ['jQuery', 'console', 'document', 'DO'],
@@ -193,7 +195,9 @@ gulp.task('make-js-components', () => {
 		)
 		.pipe(load.eslint.format())
 		.pipe(load.sourcemaps.init())
-		.on('error', swallowError)
+        .on('error', swallowError)
+        .pipe(load.babel())
+        .on('error', swallowError)
 		.pipe(load.concat('components.js'))
 		.pipe(gulp.dest(PATHS.dist + 'js/src/'))
 		.pipe(load.sourcemaps.write('.'));
