@@ -5,12 +5,15 @@
   "main": "gulpfile.js",
   "repository": "https://github.com/dnadesign/dna-recipe.git",
   "dependencies": {
+    "babel-polyfill": "^6.26.0",
     "jquery": "^3.2.1",
     "purecss": "^1.0.0",
     "slick-carousel": "^1.6.0"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0",
     "browser-sync": "^2.18.11",
     "del": "^2.2.2",
     "eslint-plugin-promise": "^3.5.0",

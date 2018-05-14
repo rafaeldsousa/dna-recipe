@@ -186,14 +186,18 @@ gulp.task('cms-css', () => {
  */
 gulp.task('makejs:components', () => {
 	return pump([
-		gulp
-            .src(PATHS.src + 'js/components/**/*.js'),
+		gulp.src([
+			'node_modules/babel-polyfill/dist/polyfill.min.js', // includes polyfill for browser compatibility
+			PATHS.src + 'js/components/**/*.js'
+		]),
 		load.eslint({
 			globals: ['jQuery', 'console', 'document', 'DO'],
 			envs: ['browser']
 		}),
 		load.eslint.format(),
 		load.sourcemaps.init()
+            .on('error', swallowError),
+		load.babel()
             .on('error', swallowError),
 		load.concat('components.js'),
 		gulp.dest(PATHS.dist + 'js/src/'),
